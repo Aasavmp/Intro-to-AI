@@ -5,8 +5,8 @@ import pygame
 import random
 
 # Defining the game screen
-display_width = 800
-display_height = 600
+display_width = 300
+display_height = 300
 
 # Defining the colors of the game
 black = (0, 0, 0)
@@ -15,7 +15,8 @@ red = (255, 0, 0)
 blue = (0, 0, 255)
 green = (0, 255, 0)
 
-game_background = white
+game_background = black
+food_color = red
 
 # Defining the snake size
 snake_size = 10
@@ -140,7 +141,7 @@ def Game_Loop():
         whole_snake(snake_size, snake_body)
 
         # Food display
-        pygame.draw.rect(gameDisplay, red, [food_x, food_y, snake_size, snake_size])
+        pygame.draw.rect(gameDisplay, food_color, [food_x, food_y, snake_size, snake_size])
 
         pygame.display.update()
 
