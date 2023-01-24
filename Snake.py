@@ -35,10 +35,10 @@ pygame.display.update()
 clock = pygame.time.Clock()
 
 # Adding 'Game Lost' message
-font = pygame.font.SysFont(None, 100)
-def message_to_screen(msg, color):
+font = pygame.font.SysFont(None, 25)
+def message_to_screen(msg, color, text_position_x, text_position_y):
     screen_text = font.render(msg, True, color)
-    gameDisplay.blit(screen_text, [display_width/2, display_height/2])
+    gameDisplay.blit(screen_text, [text_position_x, text_position_y])
 
 # Function to display the full snake
 def whole_snake(snake_size, snake_list):
@@ -63,6 +63,9 @@ def Game_Loop():
     # Body of snake
     snake_body = []
     snake_length = 1
+
+    # Score of the game
+    score = 0
 
     # Position of the food
     food_x = round(random.randrange(0, display_width - snake_size)/10.0)*10.0
@@ -93,7 +96,7 @@ def Game_Loop():
                     snake_move_x = 0
                     snake_move_y += snake_size
                     print("Down")
-
+                
         # Adding edge walls
         if snake_x >= display_width or snake_x < 0 or snake_y >= display_height or snake_y < 0:
             gameExit = True
@@ -143,6 +146,9 @@ def Game_Loop():
         # Food display
         pygame.draw.rect(gameDisplay, food_color, [food_x, food_y, snake_size, snake_size])
 
+        # Score display
+        message_to_screen("Score: " + str(score), white, 0, 5)
+
         pygame.display.update()
 
         # Snake eating food
@@ -154,9 +160,12 @@ def Game_Loop():
             # Increase snake length
             snake_length += 1
 
+            # Increase score
+            score += 1
+
         clock.tick(snake_speed)
 
-    message_to_screen("Game Over", red)
+    message_to_screen("Game Over", red, display_width/2, display_height/2)
     pygame.display.update()
     pygame.time.wait(500)
 
