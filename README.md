@@ -28,4 +28,3 @@ Follow the following steps to install the custom environment:
     pip install numpy pandas matplotlib
     pip install gym[box2d]
     pip install tensorflow
-
